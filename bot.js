@@ -1,5 +1,6 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
+var dotenv = require('dotenv').config();
 
 var botID = process.env.BOT_ID;
 
@@ -9,6 +10,7 @@ function respond() {
 
   if (request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
+    // gatherStats();
     postMessage();
     this.res.end();
   } else {
@@ -34,6 +36,7 @@ function postMessage() {
     text: botResponse
   };
 
+  console.log(process.env.LT_SUBDOMAIN);
   console.log('sending ' + botResponse + ' to ' + botID);
 
   botReq = HTTPS.request(options, function(res) {
