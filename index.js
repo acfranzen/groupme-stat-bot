@@ -4,7 +4,8 @@ http = require('http');
 director = require('director');
 cool = require('cool-ascii-faces');
 bot = require('./bot.js');
-dotenv = require('dotenv').config();
+var dotenv = require('dotenv').config();
+var bodyParser = require('body-parser');
 
 router = new director.http.Router({
   '/': {
@@ -14,6 +15,7 @@ router = new director.http.Router({
 });
 
 server = http.createServer(function(req, res) {
+  console.log(req.body);
   req.chunks = [];
   req.on('data', function(chunk) {
     req.chunks.push(chunk.toString());
