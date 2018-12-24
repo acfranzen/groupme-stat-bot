@@ -7,6 +7,7 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
     botRegex = /^\!stats$/;
+  console.log(request.group_id);
 
   if (request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
