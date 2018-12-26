@@ -1,17 +1,18 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 var dotenv = require('dotenv').config();
+var stats = require('./stats.js');
 
 var botID = process.env.BOT_ID;
 
-function respond() {
+async function respond() {
   var request = JSON.parse(this.req.chunks[0]),
     botRegex = /^\!stats$/;
   console.log(request.group_id);
 
   if (request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    // gatherStats();
+    let groupStats = await stats.makeStats(request.group_id);
     postMessage();
     this.res.end();
   } else {
