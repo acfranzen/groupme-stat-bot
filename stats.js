@@ -7,9 +7,58 @@ var botID = process.env.BOT_ID;
 async function makeStats(group_id) {
   const messages = await getMessages(group_id);
   const members = await getMembers(group_id);
-  console.log(members);
+  // console.log(members);
+  // console.log(members[0].user_id);
+  // console.log(messages[7].favorited_by.length);
+  let found = members.find(obj => {
+    return obj.user_id === members[0].user_id;
+  });
+  // console.log(found);
 
-  return messages;
+  // average likes per message
+  let avgLikes = [];
+  messages.forEach(obj => {
+    let cur = avgLikes.find(user => {
+      return user.user_id === obj.user_id;
+    });
+    if (cur) {
+      cur.likes += obj.favorited_by.length;
+      cur.messages++;
+    } else {
+      let newUsr = {
+        user_id: obj.user_id,
+        name: obj.name,
+        likes: obj.favorited_by.length,
+        messages: 1
+      };
+      avgLikes.push(newUsr);
+    }
+  });
+  console.log(avgLikes);
+  // return avgLikes;
+
+  let printString = '';
+
+  avgLikes.forEach(obj => {
+    let avg = (obj.likes / obj.messages).toFixed(2);
+    console.log(obj);
+    if (obj.user_id !== 'system') {
+      printString = printString.concat(
+        `${obj.name}: ${obj.likes} likes, ${
+          obj.messages
+        } messages, avg ${avg} likes/msg\n\n`
+      );
+    }
+  });
+
+  return printString;
+
+  // most liked messages
+
+  // never messaged in group
+  let noMsg = [];
+
+  //
 }
 
 async function getMessages(group_id) {
