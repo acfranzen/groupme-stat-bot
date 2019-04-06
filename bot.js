@@ -16,10 +16,35 @@ async function respond() {
     let groupStats = await stats.makeStats(request.group_id);
     postMessage(groupStats);
     this.res.end();
-  } else {
-    console.log("don't care");
+  } else if (request.text && /^\!avgs$/.test(request.text)) {
+    console.log('ghere');
     this.res.writeHead(200);
+    let avgStats = await stats.makeAvgs(request.group_id, []);
+    postMessage(avgStats);
     this.res.end();
+  } else if (request.text && /^\!top10$/.test(request.text)) {
+    this.res.writeHead(200);
+    let topStats = await stats.makeTop(request.group_id, []);
+    postMessage(topStats);
+    this.res.end();
+  } else {
+    // DO MENU HERE
+    if (request.text.charAt(0) === '!') {
+      this.res.writeHead(200);
+      let statMenu = `That's not a valid command!\n
+      Try using one of these commands instead:
+      !stats -- complete stats
+      !top10 -- top 10 posts of the group
+      !avgs -- average likes of all members
+      !TBD -- more to come
+      `;
+      postMessage(statMenu);
+      this.res.end();
+    } else {
+      console.log("don't care");
+      this.res.writeHead(200);
+      this.res.end();
+    }
   }
 }
 
