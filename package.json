@@ -8,6 +8,7 @@
     "dev": "node index.js --dev"
   },
   "dependencies": {
+    "cool-ascii-faces": "~1.3.x",
     "director": "",
     "dotenv": "^6.2.0",
     "request": "^2.88.0",
