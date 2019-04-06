@@ -41,6 +41,8 @@ Once on the settings page, click on the "reveal config vars" button, shown in th
 
 In the config variables section, add two variables as below: BOT_ID, and ACCESS_TOKEN:
 
+![Edit your environment variables](https://i.groupme.com/2448x494.png.44493d2b530e476ebf6cf0c0204f3423)
+
 Your BOT_ID should still be copied from earlier, so just paste that in there.
 
 To find your access token, go back to https://dev.groupme.com/bots and click "access token" in the top right hand corner
@@ -48,8 +50,6 @@ To find your access token, go back to https://dev.groupme.com/bots and click "ac
 ![Find Acess Token](https://i.groupme.com/2370x722.png.40b899b44a314fd291d8bf66a8624a86)
 
 Then go back and add it to the environment variables on Heroku, then press save.
-
-![Edit your environment variables](https://i.groupme.com/2448x494.png.44493d2b530e476ebf6cf0c0204f3423)
 
 And you're good to go!
 
